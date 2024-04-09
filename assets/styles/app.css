@@ -1,3 +1,17 @@
 body {
     background-color: skyblue;
+    text-align: center;
+}
+a {
+    text-decoration: none;
+}
+
+ul{
+    list-style-type: none;
+}
+
+li{
+    display: inline;
+    font-size: 20px;
+    
 }
