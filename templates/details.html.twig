@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails du jeu - {{ jeux.nom }}{% endblock %}
+
+{% block body %}
+    <section class="body">
+        <div class="details-container">
+            <div class="image-container">
+                <img src="{{ asset('images/' ~ jeux.image) }}" alt="{{ jeux.nom }}" />
+            </div>
+            <div class="info-container">
+             <p class="prix_ligne">Prix : <span class="prix">{{ jeux.prix }} FCFA</span></p>
+                <p>Nom : {{ jeux.nom }}</p>
+                <p>Description : {{ jeux.description }}</p>
+                <p>Stock : {{ jeux.stockDisponible }}</p>
+                {% if boutonTexte == 'OutofStock' %}
+                    <p class="OutofStock">OutofStock</p>
+                {% else %}
+                    <a href="{{ path('app_jeux_commander', {'id': jeux.id}) }}" class="boutton">{{ boutonTexte }}</a>
+                {% endif %}
+                <a href="{{ path('panier') }}" class="Retour">Retour</a>
+            </div>
+        </div>
+        
+    </section>
+{% endblock %}

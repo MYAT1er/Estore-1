@@ -3,5 +3,38 @@
 {% block title %}Shop{% endblock %}
 
 {% block body %}
-<h1>Shop</h1>
+    <!-- Afficher les jeux filtrés -->
+    <section class="body">
+        <br>
+        <h1>Shop</h1>
+        <br><br>
+        <section class="Blocks">
+            {% for jeu in pagination.items %}
+                <section class="block">
+                    <div class="gallery__container">
+                        <div class="gallery__data">
+                            <div class="gallery__img">
+                                <img src="{{ asset('images/' ~ jeu.image) }}" alt="{{ jeu.nom }}" />
+                            </div>
+                            <div class="image-description">
+                                <div>
+                                    <h3>{{ jeu.nom }}</h3>
+                                    <p>Prix : {{ jeu.prix }}</p>
+                                </div>
+                                <a href="{{ path('jeux_details', {'id': jeu.id}) }}" class="button">Acheter</a>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="sous-titre">{{ jeu.nom }} | Prix : <span>{{ jeu.prix }}</span> <br>
+                                                        Stock : <span>{{jeu.stockDisponible}}</span>
+                    </p>
+                </section>
+            {% endfor %}
+        </section>
+
+        <!-- Contrôles de pagination -->
+        <div class="pagination">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+    </section>
 {% endblock %}

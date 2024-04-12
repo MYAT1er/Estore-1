@@ -3,7 +3,17 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
-<h1>Accueil</h1>
+<section class="body">
+<br></br>
+    <h1 class="display-2">Bienvenue sur Estore,</h1>
+    </br>
+    <div class="display">
+        <p class="text"> Votre destination ultime pour les passionnés de jeux en ligne !
+        <br><br>
+        <button type="button" class="btn btn-secondary btn-lg">Plus de Details</button>
+        </p class="img">
+        <p><img src="{{ asset('images/fondAccueil.gif') }}" alt="image" class="img"/></p>
+    </div>
+</section>
 
-<p><img src="{{ asset('images/img1.png') }}" alt="image"/></p>
 {% endblock %}
