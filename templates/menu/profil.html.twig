@@ -14,9 +14,9 @@
         <img src="{{ asset('images/img1.png') }}" alt="Profile Picture">
     </div>
     <div class="">
-        <h1>John Doe</h1>
-        <p>johndoe@gmail.com</p>
-        <p>Web Developer</p>
+        <h1>{{app.user.username}}</h1>
+        <p>{{app.user.userIdentifier}}</p>
+        <p>Adresse de livraison : {{ app.user.AdresseDeLivraison}} </p>
         <br><br>
         <button type="button" class="btn btn-secondary btn-lg">se déconnecter</button>
     </div>
