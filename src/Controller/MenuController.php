@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class MenuController extends AbstractController
 {
-    #[Route('/menu', name: 'menu')]
+    #[Route('/', name: 'menu')]
     public function index(): Response
     {
         $menuItems=[
