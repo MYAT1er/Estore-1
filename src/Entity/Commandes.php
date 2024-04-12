@@ -14,7 +14,7 @@ class Commandes
     private ?int $id = null;
 
     #[ORM\ManyToOne]
-    private ?User $idUser = null;
+    private ?User $user = null;
 
     #[ORM\ManyToOne]
     private ?Jeux $idJeux = null;
@@ -27,14 +27,14 @@ class Commandes
         return $this->id;
     }
 
-    public function getIdUser(): ?User
+    public function getuser(): ?User
     {
-        return $this->idUser;
+        return $this->user;
     }
 
-    public function setIdUser(?User $idUser): static
+    public function setuser(?User $user): static
     {
-        $this->idUser = $idUser;
+        $this->user = $user;
 
         return $this;
     }

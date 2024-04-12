@@ -4,6 +4,7 @@ namespace App\Controller;
 
 
 use App\Entity\Jeux;
+use App\Entity\Commandes;
 use App\Form\JeuxType;
 use App\Repository\JeuxRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -29,7 +30,7 @@ class JeuxController extends AbstractController
 
         $menuItems=[
             ['label'=>'Accueil', 'route'=>'menu'],
-            ['label'=>'Shop', 'route'=>'panier'],
+            ['label'=>'Shop', 'route'=>'paniers'],
             ['label'=>'A propos', 'route'=>'propos'],
             ['label'=>'Profil', 'route'=>'profil']
         ];
@@ -46,7 +47,7 @@ class JeuxController extends AbstractController
 
         $menuItems=[
             ['label'=>'Accueil', 'route'=>'menu'],
-            ['label'=>'Shop', 'route'=>'panier'],
+            ['label'=>'Shop', 'route'=>'paniers'],
             ['label'=>'A propos', 'route'=>'propos'],
             ['label'=>'Profil', 'route'=>'profil']
         ];
@@ -94,12 +95,40 @@ class JeuxController extends AbstractController
     }
 
     #[Route('/{id}/commander', name: 'app_jeux_commander', methods: ['GET'])]
-    public function commander(Jeux $jeux): RedirectResponse
-    {
-        // Logique pour commander le jeu
-        // Redirection vers une page de confirmation de commande ou autre
-        return $this->redirectToRoute('app_jeux_details', ['id' => $jeux->getId()]);
+public function commander(Request $request, Jeux $jeu, EntityManagerInterface $entityManager): Response
+{
+    // Récupérer l'utilisateur actuellement connecté (vous pouvez adapter cela selon votre logique d'authentification)
+    $user = $this->getUser();
+
+    // Créer une nouvelle commande
+    $commande = new Commandes();
+    $commande->setIdJeux($jeu);
+    $commande->setuser($user);
+
+    // Récupérer la quantité depuis la requête
+    $quantite = $request->request->get('quantite');
+
+    // Vérifier si la quantité est null
+    if ($quantite === null) {
+        // Si la quantité est null, définir une valeur par défaut à 1
+        $quantite = 1;
     }
+
+    // Définir la quantité dans la commande
+    $commande->setNombresCommandes($quantite);
+
+    // Mettre à jour le stock du jeu
+    $stockActuel = $jeu->getStockDisponible();
+    $nouveauStock = $stockActuel - $commande->getNombresCommandes();
+    $jeu->setStockDisponible($nouveauStock);
+
+    // Enregistrer la commande dans la base de données
+    $entityManager->persist($commande);
+    $entityManager->flush();
+
+    // Rediriger vers le panier
+    return $this->redirectToRoute('panier');
+}
 
     #[Route('/{id}', name: 'app_jeux_show', methods: ['GET'])]
     public function show(Jeux $jeux): Response
@@ -107,7 +136,7 @@ class JeuxController extends AbstractController
 
         $menuItems=[
             ['label'=>'Accueil', 'route'=>'menu'],
-            ['label'=>'Shop', 'route'=>'panier'],
+            ['label'=>'Shop', 'route'=>'paniers'],
             ['label'=>'A propos', 'route'=>'propos'],
             ['label'=>'Profil', 'route'=>'profil']
         ];
@@ -126,7 +155,7 @@ class JeuxController extends AbstractController
 
         $menuItems=[
             ['label'=>'Accueil', 'route'=>'menu'],
-            ['label'=>'Shop', 'route'=>'panier'],
+            ['label'=>'Shop', 'route'=>'paniers'],
             ['label'=>'A propos', 'route'=>'propos'],
             ['label'=>'Profil', 'route'=>'profil']
         ];
@@ -145,7 +174,7 @@ class JeuxController extends AbstractController
 
         $menuItems=[
             ['label'=>'Accueil', 'route'=>'menu'],
-            ['label'=>'Shop', 'route'=>'panier'],
+            ['label'=>'Shop', 'route'=>'paniers'],
             ['label'=>'A propos', 'route'=>'propos'],
             ['label'=>'Profil', 'route'=>'profil']
         ];

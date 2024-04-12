@@ -17,7 +17,7 @@ class MenuController extends AbstractController
     {
         $menuItems=[
             ['label'=>'Accueil', 'route'=>'menu'],
-            ['label'=>'Shop', 'route'=>'panier'],
+            ['label'=>'Shop', 'route'=>'paniers'],
             ['label'=>'A propos', 'route'=>'propos'],
             ['label'=>'Profil', 'route'=>'profil']
         ];
@@ -27,7 +27,7 @@ class MenuController extends AbstractController
     }
 
 
-    #[Route('/shop', name: 'panier')]
+    #[Route('/shop', name: 'paniers')]
     public function shop(Request $request, JeuxRepository $jeuxRepository, PaginatorInterface $paginator): Response
     {
    
@@ -35,7 +35,7 @@ class MenuController extends AbstractController
 
         $menuItems=[
             ['label'=>'Accueil', 'route'=>'menu'],
-            ['label'=>'Shop', 'route'=>'panier'],
+            ['label'=>'Shop', 'route'=>'paniers'],
             ['label'=>'A propos', 'route'=>'propos'],
             ['label'=>'Profil', 'route'=>'profil']
         ];
@@ -58,7 +58,7 @@ class MenuController extends AbstractController
     {
         $menuItems=[
             ['label'=>'Accueil', 'route'=>'menu'],
-            ['label'=>'Shop', 'route'=>'panier'],
+            ['label'=>'Shop', 'route'=>'paniers'],
             ['label'=>'A propos', 'route'=>'propos'],
             ['label'=>'Profil', 'route'=>'profil']
         ];
@@ -73,7 +73,7 @@ class MenuController extends AbstractController
     {
         $menuItems=[
             ['label'=>'Accueil', 'route'=>'menu'],
-            ['label'=>'Shop', 'route'=>'panier'],
+            ['label'=>'Shop', 'route'=>'paniers'],
             ['label'=>'A propos', 'route'=>'propos'],
             ['label'=>'Profil', 'route'=>'profil']
         ];
